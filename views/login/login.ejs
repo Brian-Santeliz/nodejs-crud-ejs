@@ -1,0 +1,27 @@
+<%- include("../header1"); %>
+ <div class="container">
+  <div class="col-sm-6 col-sm-offset-3">
+   
+   <br><br>
+   <h2>Login</h2>
+
+   <form class="form-horizontal" action="/login/login" method="post">
+    <div class="form-group">
+     <label>Username</label>
+     <input type="text" class="form-control" name="usuario">
+    </div>
+    <div class="form-group">
+     <label>Password</label>
+     <input type="text" class="form-control" name="clave">
+    </div>
+
+    <div class="form-group">
+            <button class="btn btn-success">Login</button>
+			&nbsp;<a href="/registrarse" class="btn btn-primary">Registrarse</a>
+            
+        </div>
+   </form>
+   
+  </div>
+ </div>
+ <%- include("../footer"); %>

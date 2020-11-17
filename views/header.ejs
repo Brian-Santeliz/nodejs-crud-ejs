@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="ProyectoBACKEND">
+    <meta name="author" content="anyelo">
+    <title>ProyectoBACKEND</title>
+	<script language="javascript" src="/stylesheets/jquery-2.1.4.min.js"></script>
+    <!-- Cargar el CSS de Boostrap-->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <!-- Cargar estilos propios-->
+    <link href="../public/stylesheets/style.css" rel="stylesheet"> 
+</head>
+<body>
+  <!-- Definición del menú -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" target="_blank" href="http://localhost:3000/carros"><h3>Concesionaria Y&A C.A</h3></a>
+        <button aria-label="Mostrar u ocultar menú" class="navbar-toggler" id="botonMenu" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>	
+    <div class="contenedor-form" id="menu">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+                <a class="nav-link" href="/carros"><h6>Ver carros</h6></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/clientes"><h6>Ver Clientes</h6></a>
+            </li>
+			<li class="nav-item">
+                <a class="nav-link" href="/fabricantes"><h6>Ver fabricantes</h6></a>
+            </li>
+			<li class="nav-item">
+                <a class="nav-link" href="/logout"><h6>Salir</h6></a>
+            </li>
+				 
+        </ul>
+    </div>
+</nav>
+    <script type="text/javascript">
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            const menu = document.querySelector("#menu"),
+                botonMenu = document.querySelector("#botonMenu");
+            if (menu) {
+                botonMenu.addEventListener("click", () => menu.classList.toggle("show"));
+            }
+        });
+		
+		$(document).ready(function () {
+		     $('#filtrar').keyup(function () {
+
+                    var rex = new RegExp($(this).val(), 'i');
+                    $('.buscar tr').hide();
+                    $('.buscar tr').filter(function () {
+                        return rex.test($(this).text());
+                    }).show();
+
+                })
+		
+		});
+		
+    </script>
+	
+    <!-- Termina la definición del menú -->
+    <main role="main" class="container">
+        <div class="row">
+       

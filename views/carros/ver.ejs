@@ -1,0 +1,48 @@
+<%- include("../header"); %>
+<div class="col-12">
+    <br>
+    <br>
+    <br>
+    <h1>carros disponibles</h1>
+	<div class="input-group">
+	   <span class="input-group-addon">Buscar &nbsp;</span>
+       <input id="filtrar" type="text" class="form-control" placeholder="Ingresa el Nombre o Marca del carro que deseas buscar...">
+	</div>
+	<br>
+    <a href="/carros/agregar" class="btn btn-primary mb-2">Agregar</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Año</th>
+				<th>Marca</th>
+				<th>Especificaciones</th>
+                <th>Precio</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody class="buscar">
+            <% carros.forEach(carro => { %>
+            <tr>
+                <td><%= carro.nombre %></td>
+                <td><%= carro.año %></td>
+				<td><%= carro.marca %></td>
+				<td><%= carro.especificaciones %></td>
+                <td><%= carro.precio %></td>
+                <td>
+                    <a href="/carros/editar/<%= carro.id %>" class="btn btn-warning">
+                        Editar
+                    </a>
+                </td>
+                <td>
+                    <a href="/carros/eliminar/<%= carro.id %>" class="btn btn-danger">
+                        Eliminar
+                    </a>
+                </td>
+            </tr>
+            <% })%>
+        </tbody>
+    </table>
+</div>
+<%- include("../footer"); %>
