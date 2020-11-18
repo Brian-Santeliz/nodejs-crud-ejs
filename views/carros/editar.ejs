@@ -19,8 +19,12 @@
         </div>
 		<div class="form-group">
             <label for="marca">Marca</label>
-            <input value="<%= carro.marca %>" required id="marca" placeholder="Marca del carro"
-                class="form-control" type="text" name="marca">
+            <select class="form-control" required>
+                <option>--Seleciona una opcion--</option>
+                <% fabricantes.forEach(fabricante => { %>
+                <option  required value="<%= fabricante.id %>"><%= fabricante.nombre %></option>
+                <%}) %>
+            </select>
         </div>
 		<div class="form-group">
             <label for="especificaciones">Especificaciones</label>
