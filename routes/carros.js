@@ -22,7 +22,19 @@ router.get('/', function (req, res, next) {
   }	
 });
 router.get('/agregar', function (req, res, next) {
-    res.render("carros/agregar");
+	//CONSULTAR LA BD PARA OBTENER LOS FABRICANTES, MANDAR LA VISTA
+	const fabricantes = [
+	{
+		nombre:"Chevrolet",
+		id:1
+	},{	
+		nombre:"Ford",
+		id:2		
+}
+]
+    res.render("carros/agregar",{
+	fabricantes
+});
 });
 router.post('/insertar', function (req, res, next) {
    // Obtener el nombre marca, especificaciones y precio. Es lo mismo que
