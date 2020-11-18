@@ -4,20 +4,16 @@ const router = express.Router();
 const carrosModel = require("../models/carros");
 
 router.get("/", function (req, res, next) {
-  if (req.session.loggedin) {
-    carrosModel
-      .obtener()
-      .then((carros) => {
-        res.render("carros/ver", {
-          carros: carros,
-        });
-      })
-      .catch((err) => {
-        return res.status(500).send("Error obteniendo carros");
+  carrosModel
+    .obtener()
+    .then((carros) => {
+      res.render("carros/ver", {
+        carros: carros,
       });
-  } else {
-    res.render("login/login");
-  }
+    })
+    .catch((err) => {
+      return res.status(500).send("Error obteniendo carros");
+    });
 });
 router.get("/agregar", function (req, res, next) {
   //CONSULTAR LA BD PARA OBTENER LOS FABRICANTES, MANDAR LA VISTA

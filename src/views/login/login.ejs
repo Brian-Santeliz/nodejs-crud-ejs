@@ -1,23 +1,31 @@
 <%- include("../header1"); %>   
-   <div class="container d-flex justify-content-center">
-       <div class="col-md-6 mt-5">
-        <h2 class="text-center card-header">Inciar Sesión</h2>
-            <form  class="card card-body" action="/login/login" method="post">
-             <div class="form-group">
-              <label>Username</label>
-              <input type="text" class="form-control" name="usuario">
-             </div>
-             <div class="form-group">
-              <label>Password</label>
-              <input type="password" class="form-control" name="clave">
-             </div>
-         
-             <div class="form-group d-flex justify-content-center">
-                     <button class="btn btn-success text-uppercase">Inciar</button>
-                     <a href="/registrarse" class="btn btn-outline-primary">Registrate Aqui</a>
-                    </div>
-            </form>
+<div id="login">
+    <div class="container">
+        <div id="login-fila" class="row justify-content-center align-items-center">
+            <div id="login-columna" class="col-md-6">
+                <h3 class="text-center texto-login">Ingresa a la Concesionaria Y&A C.A Aquí</h3>
+                <div id="login-contenedor" class="col-md-12">
+                    <form id="login-formulario" class="form" action="/login/login" method="post">
+                        <h3 class="text-center text-info">Iniciar Sesion</h3>
+                        <div class="form-group">
+                            <label for="username" class="text-info">Usuario:</label><br>
+                            <input type="text" name="usuario" id="username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">Contraseña:</label><br>
+                            <input type="text" name="clave" id="password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                                <br>
+                            <input type="submit" name="submit" class="btn btn-info btn-md" value="Enviar">
+                        </div>
+                        <div id="registro-link" class="text-right">
+                            <a href="/registrarse" class="text-info">Registrate Aquí</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-   
+</div>
  <%- include("../footer"); %>
