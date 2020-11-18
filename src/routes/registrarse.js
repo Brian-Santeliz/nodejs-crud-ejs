@@ -1,22 +1,8 @@
-const express = require('express');
+const express = require("express");
+const RegistroController = require("../controllers/registroController");
 const router = express.Router();
-const registrarseModel = require("../models/registrarse");
-router.get('/', function (req, res, next) {
-    res.render("registrarse/agregar");
-});
-router.post('/insertar', function (req, res, next) {
-    const { usuario, clave } = req.body;
-    if (!usuario || !clave ) {
-        return res.status(500).send("No hay usuario o clave");
-    }
-    // Si todo sale bien, seguimos
-    registrarseModel
-        .insertar(usuario, clave)
-        .then(() => {
-            res.redirect("/login");
-        })
-        .catch(err => {
-            return res.status(500).send("Error registrando usuario");
-        });
-});
+const ctrl = new RegistroController();
+
+router.get("/", ctrl.getRegistro);
+router.post("/insertar", ctrl.postRegistro);
 module.exports = router;

@@ -1,20 +1,10 @@
 const express = require("express");
+const CarrosController = require("../controllers/carrosController");
 const router = express.Router();
 
 const carrosModel = require("../models/carros");
-
-router.get("/", function (req, res, next) {
-  carrosModel
-    .obtener()
-    .then((carros) => {
-      res.render("carros/ver", {
-        carros: carros,
-      });
-    })
-    .catch((err) => {
-      return res.status(500).send("Error obteniendo carros");
-    });
-});
+const ctrl = new CarrosController();
+router.get("/", ctrl.getController);
 router.get("/agregar", function (req, res, next) {
   //CONSULTAR LA BD PARA OBTENER LOS FABRICANTES, MANDAR LA VISTA
   const fabricantes = [
