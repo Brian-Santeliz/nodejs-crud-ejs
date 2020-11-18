@@ -1,13 +1,21 @@
 const conexion = require("../conexion");
+const bcrypt = require("bcrypt");
 module.exports = {
-  async insertar(usuario, clave) {
-    let resultados = await conexion.query(
-      `insert into usuarios
-        (usuario, clave)
-        values
-        (?, ?)`,
-      [usuario, clave]
-    );
-    return resultados;
+  insertar(usuario, clave) {
+    bcrypt.genSalt(10, function (error, salt) {
+      if (error) console.log("error salt");
+      bcrypt.hash(salt, clave, function (erro, clave) {
+        if (error) console.log("error hash");
+        console.log(clave);
+        let resultados = conexion.query(
+          `insert into usuarios
+            (usuario, clave)
+            values
+            (?, ?)`,
+          [usuario, clave]
+        );
+        return resultados;
+      });
+    });
   },
 };

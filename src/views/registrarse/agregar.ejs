@@ -1,25 +1,35 @@
 <%- include("../header1"); %>
-<div class="col-12">
-    <br>
-    <br>
-    <br>
-    <h1>Registrar Usuario</h1>
-    <form method="post" action="/registrarse/insertar">
-	    <div class="form-group">
-            <label for="usuario">Usuario</label>
-            <input required id="usuario" placeholder="Escriba el Usuario" class="form-control" type="text"
-                name="usuario">
+<div id="login">
+    <div class="container">
+        <div id="login-fila" class="row justify-content-center align-items-center">
+            <div id="login-columna" class="col-md-6">
+                <h3 class="text-center texto-login">Registrate a la Concesionaria Y&A C.A Aquí</h3>
+                <div id="login-registrar" class="col-md-12">
+                    <form id="login-formulario" class="form" action="/login/login" method="post">
+                        <h3 class="text-center text-info">Registrarse</h3>
+                        <div class="form-group">
+                            <label for="username" class="text-info">Usuario:</label><br>
+                            <input type="text" name="usuario" id="username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">Contraseña:</label><br>
+                            <input type="text" name="clave" id="password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">Repetir Contraseña:</label><br>
+                            <input type="text" name="repetir" id="password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                                <br>
+                        <input type="submit" name="submit" class="btn btn-info" value="Registrase">
+                        </div>
+                        <div id="registro-link" class="text-right">
+                            <a href="/login" class="text-info">Inica Sesión</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="clave">Clave</label>
-            <input required id="clave" placeholder="Escriba la Clave" class="form-control" type="text"
-                name="clave">
-        </div>
-		
-        <div class="form-group">
-            <button class="btn btn-success">Guardar</button>
-            &nbsp;<a href="/login" class="btn btn-primary">Volver</a>
-        </div>
-    </form>
+    </div>
 </div>
 <%- include("../footer"); %>

@@ -3,12 +3,21 @@ body {
   padding: 0;
   height: 100vh;
 }
+
 #login .container #login-fila #login-columna #login-contenedor {
   margin-top: 63px;
   max-width: 600px;
   height: 320px;
   border: 1px solid #9C9C9C;
   background-color: #EAEAEA;
+}
+#login .container #login-fila #login-columna #login-registrar {
+  margin-top: 63px;
+  max-width: 600px;
+  border: 1px solid #9C9C9C;
+  background-color: #EAEAEA;
+  height: 421px;
+  margin-bottom: 3em;
 }
 #login .container #login-fila #login-columna #login-contenedor #login-formulario {
   padding: 20px;
