@@ -1,48 +1,55 @@
 <%- include("../header"); %>
-<div class="col-12">
-    <br>
-    <br>
-    <br>
-    <h1>carros disponibles</h1>
-	<div class="input-group">
-	   <span class="input-group-addon">Buscar &nbsp;</span>
-       <input id="filtrar" type="text" class="form-control" placeholder="Ingresa el Nombre o Marca del carro que deseas buscar...">
-	</div>
-	<br>
-    <a href="/carros/agregar" class="btn btn-primary mb-2">Agregar</a>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Año</th>
-				<th>Marca</th>
-				<th>Especificaciones</th>
-                <th>Precio</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
-            </tr>
-        </thead>
-        <tbody class="buscar">
-            <% carros.forEach(carro => { %>
-            <tr>
-                <td><%= carro.nombre %></td>
-                <td><%= carro.año %></td>
-				<td><%= carro.marca %></td>
-				<td><%= carro.especificaciones %></td>
-                <td><%= carro.precio %></td>
-                <td>
-                    <a href="/carros/editar/<%= carro.id %>" class="btn btn-warning">
-                        Editar
-                    </a>
-                </td>
-                <td>
-                    <a href="/carros/eliminar/<%= carro.id %>" class="btn btn-danger">
-                        Eliminar
-                    </a>
-                </td>
-            </tr>
-            <% })%>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="mt-5 col-md-6">
+            <h1 class="text-capitalize text-center">carros disponibles</h1>
+            <span class="input-group-addon">Buscar: &nbsp;</span>
+            <input id="filtrar" type="text" class="form-control" placeholder="Ingresa el Nombre o Marca del carro que deseas buscar...">
+            <a href="/carros/agregar" class="btn btn-primary btn-block mt-3 text-capitalize">Agregar nuevo Carro</a>
+        </div>
+       
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mx-auto mt-4">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col" >Nombre</th>
+                    <th scope="col">Año</th>
+				    <th scope="col">Marca</th>
+				    <th scope="col">Especificaciones</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="buscar">
+                    <% carros.forEach(carro =>{ %>
+                    <tr >
+                        <th scope="row"><%= carro.nombre %></th>
+                        <td><%= carro.año %></td>
+                        <td><%= carro.marca %></td>
+                        <td><%= carro.especificaciones %></td>
+                        <td><%= carro.precio %></td>
+                        <td> 
+                            <a href="/carros/editar/<%= carro.id %>" class="btn btn-info">
+                            Editar
+                         </a>
+                            <a href="/carros/eliminar/<%= carro.id %>" class="btn btn-danger eliminar-btn">
+                            Eliminar
+                         </a>
+                    </td>
+                      </tr>
+                    <% }) %>
+
+                </tbody>
+              </table>
+              
+             
+              
+            
+        </div>
+    </div>
 </div>
 <%- include("../footer"); %>

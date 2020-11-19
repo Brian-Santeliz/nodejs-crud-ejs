@@ -1,5 +1,6 @@
 const pool = require("../conexion");
 const bcrypt = require("bcrypt");
+
 class RegistroController {
   getRegistro(req, res) {
     res.render("registrarse/agregar");
@@ -53,7 +54,13 @@ class RegistroController {
       );
       res.redirect("/login");
     } catch (error) {
-      console.log(error);
+      res.render("registrarse/agregar", {
+        error: "Ha ocurrido un error",
+        usuario,
+        clave,
+        repetir,
+      });
+      return;
     }
   }
 }
