@@ -87,28 +87,32 @@ class CarrosController {
     }
   }
   async actualizarCarro(req, res) {
-    const { id } = req.params;
-    const { nombre, año, marca, especificaciones, precio } = req.body;
+    const { id, nombre, año, marca, especificaciones, precio } = req.body;
     if (!nombre || !año || !marca || !especificaciones || !precio) {
       res.redirect("/carros");
     }
-    const fabrica = await pool.query(
-      "SELECT * FROM fabricantes WHERE nombre = ?",
-      [marca]
-    );
-    const [datos] = fabrica;
-    const { id: fabricanteId } = datos;
-    await pool.query(
-      `UPDATE  carros
-      set nombre = ?,
-      año = ?,
-      marca = ?,
-      especificaciones = ?,
-      precio = ?
-      fabricanteId = ?
-      WHERE id = ?`,
-      [nombre, año, marca, especificaciones, precio, fabricanteId, id]
-    );
+    try {
+      const fabrica = await pool.query(
+        "SELECT * FROM fabricantes WHERE nombre = ?",
+        [marca]
+      );
+      const [datos] = fabrica;
+      const { id: fabricanteId } = datos;
+      await pool.query(
+        `UPDATE carros
+          set nombre = ?,
+          año = ?,
+          marca = ?,
+          especificaciones = ?,
+          precio = ?,
+          fabricanteId = ?
+          WHERE id = ?`,
+        [nombre, año, marca, especificaciones, precio, fabricanteId, id]
+      );
+      res.redirect("/carros");
+    } catch (error) {
+      res.redirect("/carros");
+    }
   }
 }
 module.exports = CarrosController;

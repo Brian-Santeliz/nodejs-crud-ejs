@@ -2,14 +2,11 @@ const express = require("express");
 const CarrosController = require("../controllers/carrosController");
 const { body } = require("express-validator");
 const router = express.Router();
+const carrosModel = require("../models/carros");
 const ctrl = new CarrosController();
 
 router.get("/", ctrl.getController);
 router.get("/agregar", ctrl.agregarGetController);
-router.use("/eliminar/:id", ctrl.eliminarCarro);
-router.get("/editar/:id", ctrl.ObtenerIdController);
-
-//SANITIZAR LAS RUTAS
 router.post(
   "/insertar",
   [body("nombre").notEmpty().trim()],
@@ -19,5 +16,8 @@ router.post(
   [body("precio").notEmpty().trim().isNumeric()],
   ctrl.agregarPostController
 );
-router.post("/actualizar", ctrl.actualizarCarro);
+router.use("/eliminar/:id", ctrl.eliminarCarro);
+router.get("/editar/:id", ctrl.ObtenerIdController);
+
+router.put("/actualizar/", ctrl.actualizarCarro);
 module.exports = router;

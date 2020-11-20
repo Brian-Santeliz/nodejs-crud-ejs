@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
+const methodOverride = require("method-override");
 const credencialesDb = require("./config/credenciales");
 const carrosRouter = require("./routes/carros");
 const clientesRouter = require("./routes/clientes");
@@ -19,6 +20,7 @@ app.set("view engine", "ejs");
 app.set("port", process.env.PUERTO || 4040);
 
 app.use(logger("dev"));
+app.use(methodOverride("_method"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
