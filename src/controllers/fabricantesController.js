@@ -54,12 +54,11 @@ class FabricanteController {
       });
   }
   postFabricantesInsertarController(req, res) {
-    /* MENSAJE FLASH DE ERROR A LA VISTA */
     const { rif, nombre, telefono, direccion, contacto } = req.body;
     if (!rif || !nombre || !telefono || !direccion || !contacto) {
-      return res
-        .status(500)
-        .send("No hay rif, nombre, telefono, direccion o contacto");
+      req.flash("error", "Todos los campos son obligatorios");
+      res.redirect("/fabricantes/agregar");
+      return;
     }
     pool
       .query(
@@ -67,7 +66,6 @@ class FabricanteController {
         [rif, nombre, telefono, direccion, contacto]
       )
       .then(() => {
-        /* MENSAJE FLASH DE ERROR A LA VISTA */
         req.flash("exito", "Fabricante agregado exitosamente");
         res.redirect("/fabricantes");
       })
@@ -76,15 +74,15 @@ class FabricanteController {
       });
   }
   putFabricantesActualizatController(req, res) {
-    const { id, nombre, telefono, direccion, contacto } = req.body;
+    const { id, rif, nombre, telefono, direccion, contacto } = req.body;
     if (!nombre || !telefono || !direccion || !id || !contacto) {
-      /* MANDAR MENSAJE FLASH A LA VISTA D FAVRICANTES */
-      return res.status(500).send("No hay suficientes datos");
+      req.flash("error", "Todos los datos son necesarios para actualizar");
+      return res.redirect("/fabricantes");
     }
     pool
       .query(
-        "UPDATE fabricantes SET nombre = ?, telefono = ?, direccion = ?, contacto = ? WHERE id = ?",
-        [nombre, telefono, direccion, contacto, id]
+        "UPDATE fabricantes SET rif = ?, nombre = ?, telefono = ?, direccion = ?, contacto = ? WHERE id = ?",
+        [rif, nombre, telefono, direccion, contacto, id]
       )
       .then(() => {
         req.flash("exito", "Fabricante actualizado correctamente");
