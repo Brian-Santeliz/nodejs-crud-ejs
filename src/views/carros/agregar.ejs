@@ -1,43 +1,46 @@
 <%- include("../header"); %>
-<div class="col-12">
-    <br>
-    <br>
-    <br>
-    <h1>Agregar carro</h1>
-    <form method="post" action="/carros/insertar">
-        <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input required id="nombre" placeholder="Nombre del carro" class="form-control" type="text"
-                name="nombre">
+    <div class="container contenedor-top mb-5">
+        <%if(typeof error  !== "undefined"){ %>
+            <p class="text-center alert alert-danger text-uppercase mt-2 p-1 error-vista"><%= error %></p>
+            <%} %>
+        <h2 class="text-center mb-4 text-capitalize wei">Agrega nuevos carros a la concesionanaria</h2>
+        <div class="row d-flex justify-content-center ">
+            <div class="col-md-10">
+                <form action="/carros/insertar" method="post">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputEmail4">Nombre</label>
+                        <input required name="nombre"  type="text" class="form-control" id="inputEmail4" placeholder="Escribe el nombre del auto">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputPassword4">Año</label>
+                        <input required name="año"   type="number" class="form-control" id="inputPassword4" placeholder="Año del carro">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputState">Marca</label>
+                        <select id="inputState" class="form-control"  required name="marca">
+                            <option value=""  selected disabled>-- Seleciona una marca --</option>
+                            <% fabricantes.forEach(fabricante => { %>
+                            <option  ><%= fabricante.nombre %></option>
+                            <%}) %>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-10">
+                      <label for="inputAddress">Especificaciones</label>
+                      <input  required name="especificaciones" type="text" class="form-control" id="inputAddress" placeholder="Describe el carro">
+                        </div>
+                      <div class="form-group col-md-2">
+                        <label for="inputZip">Precio</label>
+                        <input  required name="precio" type="number" class="form-control" placeholder="$ Precio" id="inputZip">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block">Agregar Carro</button>
+                  </form>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="año">Año</label>
-            <input required id="año" placeholder="Año del carro" class="form-control" type="text"
-                name="año">
-        </div>
-		<div class="form-group">
-            <label for="marca">Marca</label>
-            <select class="form-control" required>
-                <option>--Seleciona una opcion--</option>
-                <% fabricantes.forEach(fabricante => { %>
-                <option  required value="<%= fabricante.id %>"><%= fabricante.nombre %></option>
-                <%}) %>
-            </select>
-        </div>
-		<div class="form-group">
-            <label for="especificaciones">Especificaciones</label>
-            <input required id="especificaciones" placeholder="Especificaciones del carro" class="form-control" type="text"
-                name="especificaciones">
-        </div>
-        <div class="form-group">
-            <label for="precio">Precio</label>
-            <input required id="precio" placeholder="Precio del carro" class="form-control" type="number"
-                name="precio">
-        </div>
-        <div class="form-group">
-            <button class="btn btn-success">Guardar</button>
-            &nbsp;<a href="/carros" class="btn btn-primary">Volver</a>
-        </div>
-    </form>
+    </div>
 </div>
 <%- include("../footer"); %>

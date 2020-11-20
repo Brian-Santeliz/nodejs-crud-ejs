@@ -1,10 +1,8 @@
 <%- include("../header"); %>
 <div class="col-12">
-    <br>
-    <br>
-    <br>
+    
     <h1>Editar carro</h1>
-    <form method="post" action="/carros/actualizar">
+    <form method="post" action="/carros/actualizar" method="POST">
 
         <input value="<%= carro.id %>" name="id" type="hidden">
         <div class="form-group">
@@ -19,10 +17,10 @@
         </div>
 		<div class="form-group">
             <label for="marca">Marca</label>
-            <select class="form-control" required>
-                <option>--Seleciona una opcion--</option>
+            <select id="marca" class="form-control"  name="marca">
+                <option value=""  selected disabled>-- Seleciona una marca --</option>
                 <% fabricantes.forEach(fabricante => { %>
-                <option  required value="<%= fabricante.id %>"><%= fabricante.nombre %></option>
+                <option  required><%= fabricante.nombre %></option>
                 <%}) %>
             </select>
         </div>

@@ -3,6 +3,8 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session);
+const credencialesDb = require("./config/credenciales");
 const carrosRouter = require("./routes/carros");
 const clientesRouter = require("./routes/clientes");
 const fabricantesRouter = require("./routes/fabricantes");
@@ -21,13 +23,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+const store = new MySQLStore(credencialesDb);
 app.use(
   session({
     secret: "secret",
     resave: false,
     saveUninitialized: false,
+    store,
   })
 );
+app.use(Verificar.sessionActiva);
 app.use("/carros", Verificar.auth, carrosRouter);
 app.use("/clientes", Verificar.auth, clientesRouter);
 app.use("/fabricantes", Verificar.auth, fabricantesRouter);
