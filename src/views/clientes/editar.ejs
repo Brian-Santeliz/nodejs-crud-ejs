@@ -1,5 +1,52 @@
 <%- include("../header"); %>
-<div class="col-12">
+
+
+<div class="container contenedor-top mb-5">
+  <% if(typeof error !== "undefined") {%>
+    <p class="text-center alert alert-danger text-uppercase mt-2 p-1 error-vista"><%= error %></p>
+    <% }%>
+    <h2 class="text-center mb-4 text-capitalize font-weight-light">Actualiza el carro: <%= carro.nombre %></h2>
+    <div class="row d-flex justify-content-center ">
+        <div class="col-md-10">
+            <form action="/carros/actualizar?_method=PUT" method="post">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Nombre</label>
+                    <input value="<%= carro.id %>" name="id" type="hidden">
+                    <input required value="<%= carro.nombre %>" name="nombre"  type="text" class="form-control" id="inputEmail4" placeholder="Escribe el nombre del auto">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">Año</label>
+                    <input required name="año"  value="<%= carro.año %>" type="number" class="form-control" id="inputPassword4" placeholder="Año del carro">
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputState">Marca</label>
+                    <select id="inputState" class="form-control"  required name="marca">
+                        <option value=""  selected disabled>-- Seleciona una marca --</option>
+                        <% fabricantes.forEach(fabricante => { %>
+                        <option  ><%= fabricante.nombre %></option>
+                        <%}) %>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                  <label for="inputAddress">Especificaciones</label>
+                  <input  required   value="<%= carro.especificaciones %>"  name="especificaciones" type="text" class="form-control" id="inputAddress" placeholder="Describe el carro">
+                    </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputZip">Precio</label>
+                    <input  required name="precio"  value="<%= carro.precio %>" type="number" class="form-control" placeholder="$ Precio" id="inputZip">
+                  </div>
+                </div>
+                <div class="form-group">
+                <button type="submit" class="text-uppercase btn btn-info btn-block">Actualizar Carro</button>
+              </form>
+        </div>
+    </div>
+</div>
+</div>
+<!-- <div class="col-12">
     <br>
     <br>
     <br>
@@ -32,5 +79,5 @@
             &nbsp;<a href="/clientes" class="btn btn-primary">Volver</a>
         </div>
     </form>
-</div>
+</div> -->
 <%- include("../footer"); %>

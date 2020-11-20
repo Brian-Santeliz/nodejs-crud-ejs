@@ -7,14 +7,14 @@
         <div class="mt-5 col-md-6">
             <% if(carros.length <= 0) {%>
                 <p class="text-capitalize text-center">Agrega nuevos carros a la concesionaria</p>
-            <a href="/carros/agregar" class="btn btn-primary btn-block mt-3 text-capitalize">Agregar nuevo Carro</a>
+            <a href="/carros/agregar" class="btn btn-primary btn-block mt-3 text-capitalize">Agregar nuevos Carros <i class="fa fa-car"></i> </a>
                 
                 <%}else{%>
             <h1 class="text-capitalize text-center">carros disponibles</h1>
             <span class="input-group-addon">Buscar: &nbsp;</span>
             <input id="filtrar" type="text" class="form-control" placeholder="Ingresa el Nombre o Marca del carro que deseas buscar...">
             
-            <a href="/carros/agregar" class="btn btn-primary btn-block mt-3 text-capitalize">Agregar nuevo Carro</a>
+            <a href="/carros/agregar" class="btn btn-primary btn-block mt-3 text-capitalize">Agregar nuevos Carros</a>
         
         </div>
         <%}%>
@@ -52,10 +52,10 @@
                         <td><%= carro.precio %></td>
                         <td> 
                             <a href="/carros/editar/<%= carro.id %>" class="btn btn-info" >
-                            Editar
-                         </a>
+                                <i class="fa fa-edit"></i>
+                            </a>
                             <a href="/carros/eliminar/<%= carro.id %>" class="btn btn-danger eliminar-btn" onclick="return confirm(`¿Esta seguro en eliminar el carro: <%= carro.nombre %>?`)">
-                            Eliminar
+                            <i class="fa fa-trash"></i>
                          </a>
                     </td>
                       </tr>
