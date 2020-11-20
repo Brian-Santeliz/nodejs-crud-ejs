@@ -28,5 +28,10 @@ class ClienteController {
         res.redirect("/clientes");
       });
   }
+  getClientesEditarController(req, res) {
+    res.render("clientes/editar", {
+      cliente: cliente,
+    });
+  }
 }
 module.exports = ClienteController;

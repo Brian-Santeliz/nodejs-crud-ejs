@@ -64,6 +64,10 @@ class CarrosController {
       const editar = await pool.query(`select * from carros where id = ?`, [
         id,
       ]);
+      if (editar.length <= 0) {
+        res.redirect("/carros");
+        return;
+      }
       const [carro] = editar;
       res.render("carros/editar", {
         carro,
@@ -113,7 +117,7 @@ class CarrosController {
       );
       res.redirect("/carros");
     } catch (error) {
-      res.status().json(error);
+      res.status(500).json(error);
       res.redirect("/carros");
     }
   }
