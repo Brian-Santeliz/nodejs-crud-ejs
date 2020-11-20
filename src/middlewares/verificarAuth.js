@@ -14,6 +14,7 @@ class Middleware {
   }
   static sessionFlash(req, res, next) {
     res.locals.exito = req.flash("exito");
+    res.locals.errorMsg = req.flash("error");
     next();
   }
 }
