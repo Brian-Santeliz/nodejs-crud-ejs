@@ -46,9 +46,9 @@ class RegistroController {
     const nuevaClave = await bcrypt.hash(clave, salt);
     try {
       await pool.query(
-        `insert into usuarios
+        `INSERT INTO usuarios
               (usuario, clave)
-              values
+              VALUES
               (?, ?)`,
         [usuario, nuevaClave]
       );

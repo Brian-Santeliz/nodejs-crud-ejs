@@ -2,10 +2,8 @@ const pool = require("../conexion");
 class CarrosController {
   async getCarrosController(req, res) {
     try {
-      const carros = await pool.query(
-        `select id, nombre, año, marca, especificaciones, precio from carros`
-      );
-      res.render("carros/ver", {
+      const carros = await pool.query(`SELECT * from carros`);
+      res.status(200).render("carros/ver", {
         carros,
       });
     } catch (error) {
@@ -18,11 +16,11 @@ class CarrosController {
   async getCarrosAgregarController(req, res, next) {
     try {
       const fabricantes = await pool.query("SELECT * FROM fabricantes");
-      res.render("carros/agregar", {
+      res.status(200).render("carros/agregar", {
         fabricantes,
       });
     } catch (error) {
-      res.render("carros/agregar", {
+      res.status(500).render("carros/agregar", {
         fabricantes,
         error: "Ha ocurrido un error obteniendo los fabricantes",
       });
@@ -32,7 +30,7 @@ class CarrosController {
     const fabricantes = await pool.query("SELECT * FROM fabricantes");
     const { nombre, año, marca, especificaciones, precio } = req.body;
     if (!nombre || !año || !marca || !especificaciones || !precio) {
-      res.render("carros/agregar", {
+      res.status(200).render("carros/agregar", {
         error: "Todos los datos son necesarios",
         fabricantes,
       });
@@ -46,12 +44,12 @@ class CarrosController {
       const [marcaResul] = fabrica;
       const { id } = marcaResul;
       await pool.query(
-        `insert into carros (nombre, año, marca, especificaciones, precio, fabricanteId) values (?, ?, ?, ?, ?,?)`,
+        `INSERT INTO carros (nombre, año, marca, especificaciones, precio, fabricanteId) VALUES (?, ?, ?, ?, ?,?)`,
         [nombre, año, marca, especificaciones, precio, id]
       );
-      res.redirect("/carros");
+      res.status(201).redirect("/carros");
     } catch (error) {
-      res.render("carros/agregar", {
+      res.status(500).render("carros/agregar", {
         error: "Ha ocurrido un error al insertar el carro en la base de datos",
         fabricantes,
       });
@@ -61,20 +59,20 @@ class CarrosController {
     const { id } = req.params;
     try {
       const fabricantes = await pool.query("SELECT * FROM fabricantes");
-      const editar = await pool.query(`select * from carros where id = ?`, [
+      const editar = await pool.query(`SELECT * FROM carros WHERE id = ?`, [
         id,
       ]);
       if (editar.length <= 0) {
-        res.redirect("/carros");
+        res.status(204).redirect("/carros");
         return;
       }
       const [carro] = editar;
-      res.render("carros/editar", {
+      res.status(200).render("carros/editar", {
         carro,
         fabricantes,
       });
     } catch (error) {
-      res.render("carros/editar", {
+      res.status(500).render("carros/editar", {
         carro,
         fabricantes,
         error: "Ha ocurrrido un error editando el registro",
@@ -84,11 +82,10 @@ class CarrosController {
   async deleteCarrosEliminarController(req, res) {
     const { id } = req.params;
     try {
-      await pool.query(`delete from carros where id = ?`, [id]);
-      res.redirect("/carros");
+      await pool.query(`DELETE FROM carros WHERE id = ?`, [id]);
+      res.status(200).redirect("/carros");
     } catch (error) {
-      res.status(500).json(error);
-      res.redirect("/carros");
+      res.status(500).json(error).redirect("/carros");
     }
   }
   async putCarrosActualizarController(req, res) {
@@ -106,7 +103,7 @@ class CarrosController {
       const { id: fabricanteId } = datos;
       await pool.query(
         `UPDATE carros
-          set nombre = ?,
+          SET nombre = ?,
           año = ?,
           marca = ?,
           especificaciones = ?,
@@ -117,8 +114,7 @@ class CarrosController {
       );
       res.redirect("/carros");
     } catch (error) {
-      res.status(500).json(error);
-      res.redirect("/carros");
+      res.status(500).json(erro).redirect("/carros");
     }
   }
 }

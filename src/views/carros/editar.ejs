@@ -1,6 +1,9 @@
 <%- include("../header"); %>
 
 <div class="container contenedor-top mb-5">
+  <% if(typeof error !== "undefined") {%>
+    <p class="text-center alert alert-danger text-uppercase mt-2 p-1 error-vista"><%= error %></p>
+    <% }%>
     <h2 class="text-center mb-4 text-capitalize font-weight-light">Actualiza el carro: <%= carro.nombre %></h2>
     <div class="row d-flex justify-content-center ">
         <div class="col-md-10">
