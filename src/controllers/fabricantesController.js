@@ -57,7 +57,6 @@ class FabricanteController {
     /* MENSAJE FLASH DE ERROR A LA VISTA */
     const { rif, nombre, telefono, direccion, contacto } = req.body;
     if (!rif || !nombre || !telefono || !direccion || !contacto) {
-      /* SA NITIZAR */
       return res
         .status(500)
         .send("No hay rif, nombre, telefono, direccion o contacto");
