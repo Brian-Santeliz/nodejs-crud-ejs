@@ -30,7 +30,7 @@ class CarrosController {
     const fabricantes = await pool.query("SELECT * FROM fabricantes");
     const { nombre, año, marca, especificaciones, precio } = req.body;
     if (!nombre || !año || !marca || !especificaciones || !precio) {
-      res.status(200).render("carros/agregar", {
+      res.render("carros/agregar", {
         error: "Todos los datos son necesarios",
         fabricantes,
       });

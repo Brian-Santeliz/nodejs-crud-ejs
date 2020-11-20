@@ -50,9 +50,9 @@ class ClienteController {
     if (!cedula || !nombre || !telefono || !direccion) {
       /* RENDERIZAR UN MENSAJE DE ERROR EN LA VISTA DE AGREGAR */
       /* AGREGAR MENSAJES FLASH */
-      return res
-        .status(500)
-        .send("No hay cedula, nombre, telefono o direccion");
+      req.flash("error", "Todos los campos son necesarios");
+      res.redirect("/clientes/agregar");
+      return;
     }
     pool
       .query(
@@ -69,8 +69,8 @@ class ClienteController {
   putClientesActualizarController(req, res) {
     const { id, cedula, nombre, telefono, direccion } = req.body;
     if (!nombre || !telefono || !direccion || !id) {
-      /* VALIDAR */
-      return res.status(500).send("No hay suficientes datos");
+      req.flash("error", "Todos los campos son necesarios para actualizar");
+      return res.redirect("/clientes");
     }
 
     pool

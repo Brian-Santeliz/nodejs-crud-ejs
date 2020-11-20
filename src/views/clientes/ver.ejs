@@ -1,9 +1,7 @@
 <%- include("../partials/header"); %>
 <div class="container ">
     <div class="row d-flex justify-content-center">
-        <%if(typeof error !== "undefined") {%>
-            <p class="text-center mt-3 alert alert-danger p-1"><%= error%></p>
-        <%}%>
+        <%- include("../partials/error"); %>
         <div class="mt-5 col-md-6">
             <% if(clientes.length <= 0) {%>
                 <p class="text-capitalize text-center">Añade nuevos clientes a la concesionaria</p>
