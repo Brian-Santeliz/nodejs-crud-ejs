@@ -83,11 +83,18 @@ class CarrosController {
   async deleteCarrosEliminarController(req, res) {
     const { id } = req.params;
     try {
-      await pool.query(`DELETE FROM carros WHERE id = ?`, [id]);
+      const {
+        affectedRows,
+      } = await pool.query(`DELETE FROM carros WHERE id = ?`, [id]);
+      if (affectedRows === 0) {
+        req.flash("error", "El id del carro no existe");
+        res.redirect("/carros");
+        return;
+      }
       req.flash("exito", "Carro eliminado correctamente");
       res.status(200).redirect("/carros");
     } catch (error) {
-      res.status(500).json(error).redirect("/carros");
+      res.status(500).redirect("/carros");
     }
   }
   async putCarrosActualizarController(req, res) {
@@ -118,7 +125,7 @@ class CarrosController {
       req.flash("exito", "Carro actualizado correctamente");
       res.redirect("/carros");
     } catch (error) {
-      res.status(500).json(erro).redirect("/carros");
+      res.status(500).redirect("/carros");
     }
   }
 }

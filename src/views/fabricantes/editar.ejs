@@ -4,7 +4,7 @@
     <br>
     <br>
     <h1>Editar fabricantes</h1>
-    <form method="post" action="/fabricantes/actualizar">
+    <form method="POST" action="/fabricantes/actualizar?_method=PUT">
         <input value="<%= fabricante.id %>" name="id" type="hidden">
 		<div class="form-group">
             <label for="rif">Rif</label>

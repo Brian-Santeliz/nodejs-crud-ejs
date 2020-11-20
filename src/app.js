@@ -13,7 +13,7 @@ const fabricantesRouter = require("./routes/fabricantes");
 const loginRouter = require("./routes/login");
 const registrarseRouter = require("./routes/registrarse");
 const logoutRouter = require("./routes/logout");
-const Middleware = require("./middlewares/verificarAuth");
+const Middleware = require("./middlewares/Middleware");
 const app = express();
 
 app.set("views", path.join(__dirname, "views"));

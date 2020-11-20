@@ -10,7 +10,7 @@ class ClienteController {
         });
       })
       .catch((e) => {
-        res.status(500).json(e).redirect("/carros");
+        res.status(500).redirect("/carros");
       });
   }
   getClientesAgregarController(req, res) {
@@ -20,12 +20,17 @@ class ClienteController {
     const { id } = req.params;
     pool
       .query("DELETE from clientes WHERE id = ?", [id])
-      .then(() => {
+      .then(({ affectedRows }) => {
+        if (affectedRows === 0) {
+          req.flash("error", "Id no encontrado");
+          res.redirect("/clientes");
+          return;
+        }
         req.flash("exito", "Cliente eliminado correctamente");
         res.redirect("/clientes");
       })
       .catch((e) => {
-        res.status(500).json(e).redirect("/clientes");
+        res.status(500).redirect("/clientes");
       });
   }
   getClientesEditarController(req, res) {
@@ -43,7 +48,7 @@ class ClienteController {
         });
       })
       .catch((e) => {
-        res.status(500).json(e).redirect("/clientes");
+        res.status(500).redirect("/clientes");
       });
   }
   postClientesAgregarController(req, res) {
@@ -63,7 +68,7 @@ class ClienteController {
         res.status(201).redirect("/clientes");
       })
       .catch((e) => {
-        res.status(500).json(e).redirect("/clientes");
+        res.status(500).redirect("/clientes");
       });
   }
   putClientesActualizarController(req, res) {
