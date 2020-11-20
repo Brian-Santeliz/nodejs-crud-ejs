@@ -21,6 +21,7 @@ class ClienteController {
     pool
       .query("DELETE from clientes WHERE id = ?", [id])
       .then(() => {
+        req.flash("exito", "Cliente eliminado correctamente");
         res.redirect("/clientes");
       })
       .catch((e) => {
@@ -48,8 +49,6 @@ class ClienteController {
   postClientesAgregarController(req, res) {
     const { cedula, nombre, telefono, direccion } = req.body;
     if (!cedula || !nombre || !telefono || !direccion) {
-      /* RENDERIZAR UN MENSAJE DE ERROR EN LA VISTA DE AGREGAR */
-      /* AGREGAR MENSAJES FLASH */
       req.flash("error", "Todos los campos son necesarios");
       res.redirect("/clientes/agregar");
       return;
@@ -60,6 +59,7 @@ class ClienteController {
         [cedula, nombre, telefono, direccion]
       )
       .then(() => {
+        req.flash("exito", "Cliente añadido correctamente");
         res.status(201).redirect("/clientes");
       })
       .catch((e) => {
@@ -72,13 +72,13 @@ class ClienteController {
       req.flash("error", "Todos los campos son necesarios para actualizar");
       return res.redirect("/clientes");
     }
-
     pool
       .query(
         "UPDATE clientes SET cedula = ?, nombre = ?, telefono = ?, direccion = ?  WHERE id = ?",
         [cedula, nombre, telefono, direccion, id]
       )
       .then(() => {
+        req.flash("exito", "Cliente actualizado correctamente");
         res.status(201).redirect("/clientes");
       })
       .catch((e) => {
