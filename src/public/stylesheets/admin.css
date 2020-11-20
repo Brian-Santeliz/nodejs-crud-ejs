@@ -26,3 +26,9 @@ body{
   margin: 0 auto;
   margin-bottom: 2em;
 }
+.alerta{
+  margin: 1em auto;
+max-width: 36em;
+width: 58%;
+
+}

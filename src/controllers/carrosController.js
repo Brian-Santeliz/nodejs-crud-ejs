@@ -47,6 +47,7 @@ class CarrosController {
         `INSERT INTO carros (nombre, año, marca, especificaciones, precio, fabricanteId) VALUES (?, ?, ?, ?, ?,?)`,
         [nombre, año, marca, especificaciones, precio, id]
       );
+      req.flash("exito", "Carro agregado correctamente");
       res.status(201).redirect("/carros");
     } catch (error) {
       res.status(500).render("carros/agregar", {
@@ -92,6 +93,7 @@ class CarrosController {
   async putCarrosActualizarController(req, res) {
     const { id, nombre, año, marca, especificaciones, precio } = req.body;
     if (!nombre || !año || !marca || !especificaciones || !precio) {
+      req.flash("exito", "Todos los campos son necesarios");
       res.redirect("/carros");
       return;
     }
@@ -113,6 +115,7 @@ class CarrosController {
           WHERE id = ?`,
         [nombre, año, marca, especificaciones, precio, fabricanteId, id]
       );
+      req.flash("exito", "Carro actualizado correctamente");
       res.redirect("/carros");
     } catch (error) {
       res.status(500).json(erro).redirect("/carros");

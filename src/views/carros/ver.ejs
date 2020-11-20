@@ -1,6 +1,7 @@
 <%- include("../partials/header"); %>
 <div class="container ">
     <div class="row d-flex justify-content-center">
+        <%- include("../partials/exito") %>
         <%if(typeof error !== "undefined") {%>
             <p class="text-center mt-3 alert alert-danger p-1"><%= error%></p>
         <%}%>

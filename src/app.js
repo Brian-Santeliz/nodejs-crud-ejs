@@ -13,7 +13,7 @@ const fabricantesRouter = require("./routes/fabricantes");
 const loginRouter = require("./routes/login");
 const registrarseRouter = require("./routes/registrarse");
 const logoutRouter = require("./routes/logout");
-const Verificar = require("./middlewares/verificarAuth");
+const Middleware = require("./middlewares/verificarAuth");
 const app = express();
 
 app.set("views", path.join(__dirname, "views"));
@@ -36,10 +36,11 @@ app.use(
   })
 );
 app.use(flash());
-app.use(Verificar.sessionActiva);
-app.use("/carros", Verificar.auth, carrosRouter);
-app.use("/clientes", Verificar.auth, clientesRouter);
-app.use("/fabricantes", Verificar.auth, fabricantesRouter);
+app.use(Middleware.sessionFlash);
+app.use(Middleware.sessionActiva);
+app.use("/carros", Middleware.auth, carrosRouter);
+app.use("/clientes", Middleware.auth, clientesRouter);
+app.use("/fabricantes", Middleware.auth, fabricantesRouter);
 app.use("/login", loginRouter);
 app.use("/registrarse", registrarseRouter);
 app.use("/logout", logoutRouter);

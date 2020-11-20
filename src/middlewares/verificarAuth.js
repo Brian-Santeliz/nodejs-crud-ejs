@@ -1,4 +1,4 @@
-class Verificar {
+class Middleware {
   static auth(req, res, next) {
     if (!req.session.loggedin) {
       res.redirect("/login");
@@ -12,5 +12,9 @@ class Verificar {
     }
     next();
   }
+  static sessionFlash(req, res, next) {
+    res.locals.exito = req.flash("exito");
+    next();
+  }
 }
-module.exports = Verificar;
+module.exports = Middleware;
