@@ -1,6 +1,6 @@
 const pool = require("../conexion");
 class CarrosController {
-  async getController(req, res) {
+  async getCarrosController(req, res) {
     try {
       const carros = await pool.query(
         `select id, nombre, año, marca, especificaciones, precio from carros`
@@ -15,7 +15,7 @@ class CarrosController {
       });
     }
   }
-  async agregarGetController(req, res, next) {
+  async getCarrosAgregarController(req, res, next) {
     try {
       const fabricantes = await pool.query("SELECT * FROM fabricantes");
       res.render("carros/agregar", {
@@ -28,7 +28,7 @@ class CarrosController {
       });
     }
   }
-  async agregarPostController(req, res) {
+  async postCarrosAgregarController(req, res) {
     const fabricantes = await pool.query("SELECT * FROM fabricantes");
     const { nombre, año, marca, especificaciones, precio } = req.body;
     if (!nombre || !año || !marca || !especificaciones || !precio) {
@@ -57,7 +57,7 @@ class CarrosController {
       });
     }
   }
-  async ObtenerIdController(req, res) {
+  async getCarrosObtenerIdController(req, res) {
     const { id } = req.params;
     try {
       const fabricantes = await pool.query("SELECT * FROM fabricantes");
@@ -77,19 +77,21 @@ class CarrosController {
       });
     }
   }
-  async eliminarCarro(req, res) {
+  async deleteCarrosEliminarController(req, res) {
     const { id } = req.params;
     try {
       await pool.query(`delete from carros where id = ?`, [id]);
       res.redirect("/carros");
     } catch (error) {
+      res.status(500).json(error);
       res.redirect("/carros");
     }
   }
-  async actualizarCarro(req, res) {
+  async putCarrosActualizarController(req, res) {
     const { id, nombre, año, marca, especificaciones, precio } = req.body;
     if (!nombre || !año || !marca || !especificaciones || !precio) {
       res.redirect("/carros");
+      return;
     }
     try {
       const fabrica = await pool.query(
@@ -111,6 +113,7 @@ class CarrosController {
       );
       res.redirect("/carros");
     } catch (error) {
+      res.status().json(error);
       res.redirect("/carros");
     }
   }

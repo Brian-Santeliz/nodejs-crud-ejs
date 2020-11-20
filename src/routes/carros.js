@@ -2,11 +2,12 @@ const express = require("express");
 const CarrosController = require("../controllers/carrosController");
 const { body } = require("express-validator");
 const router = express.Router();
-const carrosModel = require("../models/carros");
 const ctrl = new CarrosController();
 
-router.get("/", ctrl.getController);
-router.get("/agregar", ctrl.agregarGetController);
+router.get("/", ctrl.getCarrosController);
+router.get("/agregar", ctrl.getCarrosAgregarController);
+router.get("/editar/:id", ctrl.getCarrosObtenerIdController);
+router.use("/eliminar/:id", ctrl.deleteCarrosEliminarController);
 router.post(
   "/insertar",
   [body("nombre").notEmpty().trim()],
@@ -14,10 +15,15 @@ router.post(
   [body("marca").notEmpty()],
   [body("especificaciones").notEmpty().trim()],
   [body("precio").notEmpty().trim().isNumeric()],
-  ctrl.agregarPostController
+  ctrl.postCarrosAgregarController
 );
-router.use("/eliminar/:id", ctrl.eliminarCarro);
-router.get("/editar/:id", ctrl.ObtenerIdController);
-
-router.put("/actualizar/", ctrl.actualizarCarro);
+router.put(
+  "/actualizar/",
+  [body("nombre").notEmpty().trim()],
+  [body("año").notEmpty().trim().isNumeric()],
+  [body("marca").notEmpty()],
+  [body("especificaciones").notEmpty().trim()],
+  [body("precio").notEmpty().trim().isNumeric()],
+  ctrl.putCarrosActualizarController
+);
 module.exports = router;

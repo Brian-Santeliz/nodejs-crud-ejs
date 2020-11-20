@@ -1,43 +1,45 @@
 <%- include("../header"); %>
-<div class="col-12">
-    
-    <h1>Editar carro</h1>
-    <form method="post" action="/carros/actualizar?_method=PUT" method="POST">
 
-        <input value="<%= carro.id %>" name="id" type="hidden">
-        <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input value="<%= carro.nombre %>" required id="nombre" placeholder="Nombre del carro"
-                class="form-control" type="text" name="nombre">
+<div class="container contenedor-top mb-5">
+    <h2 class="text-center mb-4 text-capitalize font-weight-light">Actualiza el carro: <%= carro.nombre %></h2>
+    <div class="row d-flex justify-content-center ">
+        <div class="col-md-10">
+            <form action="/carros/actualizar?_method=PUT" method="post">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail4">Nombre</label>
+                    <input value="<%= carro.id %>" name="id" type="hidden">
+                    <input required value="<%= carro.nombre %>" name="nombre"  type="text" class="form-control" id="inputEmail4" placeholder="Escribe el nombre del auto">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">Año</label>
+                    <input required name="año"  value="<%= carro.año %>" type="number" class="form-control" id="inputPassword4" placeholder="Año del carro">
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputState">Marca</label>
+                    <select id="inputState" class="form-control"  required name="marca">
+                        <option value=""  selected disabled>-- Seleciona una marca --</option>
+                        <% fabricantes.forEach(fabricante => { %>
+                        <option  ><%= fabricante.nombre %></option>
+                        <%}) %>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                  <label for="inputAddress">Especificaciones</label>
+                  <input  required   value="<%= carro.especificaciones %>"  name="especificaciones" type="text" class="form-control" id="inputAddress" placeholder="Describe el carro">
+                    </div>
+                  <div class="form-group col-md-2">
+                    <label for="inputZip">Precio</label>
+                    <input  required name="precio"  value="<%= carro.precio %>" type="number" class="form-control" placeholder="$ Precio" id="inputZip">
+                  </div>
+                </div>
+                <div class="form-group">
+                <button type="submit" class="text-uppercase btn btn-info btn-block">Actualizar Carro</button>
+              </form>
         </div>
-        <div class="form-group">
-            <label for="año">Año</label>
-            <input value="<%= carro.año %>" required id="año" placeholder="Año del carro"
-                class="form-control" type="text" name="año">
-        </div>
-		<div class="form-group">
-            <label for="marca">Marca</label>
-            <select id="marca" class="form-control"  name="marca">
-                <option value=""  selected disabled>-- Seleciona una marca --</option>
-                <% fabricantes.forEach(fabricante => { %>
-                <option  required><%= fabricante.nombre %></option>
-                <%}) %>
-            </select>
-        </div>
-		<div class="form-group">
-            <label for="especificaciones">Especificaciones</label>
-            <input value="<%= carro.especificaciones %>" required id="especificaciones" placeholder="Especificaciones del carro"
-                class="form-control" type="text" name="especificaciones">
-        </div>
-        <div class="form-group">
-            <label for="precio">Precio</label>
-            <input value="<%= carro.precio %>" required id="precio" placeholder="Precio del carro
-                class="form-control" type="number" name="precio">
-        </div>
-        <div class="form-group">
-            <button class="btn btn-success">Guardar</button>
-            &nbsp;<a href="/carros" class="btn btn-primary">Volver</a>
-        </div>
-    </form>
+    </div>
+</div>
 </div>
 <%- include("../footer"); %>

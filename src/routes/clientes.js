@@ -1,29 +1,15 @@
-const express = require("express");
-const router = express.Router();
-
+const { Router } = require("express");
+const ClienteController = require("../controllers/clientesController");
+const router = Router();
+const ctrl = new ClienteController();
 const clientesModel = require("../models/clientes");
 
-router.get("/", function (req, res, next) {
-  clientesModel
-    .obtener()
-    .then((clientes) => {
-      res.render("clientes/ver", {
-        clientes: clientes,
-      });
-    })
-    .catch((err) => {
-      return res.status(500).send("Error obteniendo clientes");
-    });
-});
-router.get("/agregar", function (req, res, next) {
-  res.render("clientes/agregar");
-});
+//RUTAS POST AGREGAR VALIDARLAS CON EXPRESS-VALIDATOR
+router.get("/", ctrl.getClientesController);
+router.get("/agregar", ctrl.getClientesAgregarController);
+router.use("/eliminar/:id", ctrl.deleteClientesController);
+
 router.post("/insertar", function (req, res, next) {
-  // Obtener el nombre marca, especificaciones y precio. Es lo mismo que
-  // const nombre = req.body.nombre;
-  //const marca = req.body.marca;
-  //const especificaciones = req.body.especificaciones;
-  // const precio = req.body.precio;
   const { cedula, nombre, telefono, direccion } = req.body;
   if (!cedula || !nombre || !telefono || !direccion) {
     return res.status(500).send("No hay cedula, nombre, telefono o direccion");
@@ -36,16 +22,6 @@ router.post("/insertar", function (req, res, next) {
     })
     .catch((err) => {
       return res.status(500).send("Error insertando clientes");
-    });
-});
-router.get("/eliminar/:id", function (req, res, next) {
-  clientesModel
-    .eliminar(req.params.id)
-    .then(() => {
-      res.redirect("/clientes");
-    })
-    .catch((err) => {
-      return res.status(500).send("Error eliminando");
     });
 });
 router.get("/editar/:id", function (req, res, next) {
