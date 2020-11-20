@@ -5,6 +5,7 @@ const logger = require("morgan");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 const methodOverride = require("method-override");
+const flash = require("connect-flash");
 const credencialesDb = require("./config/credenciales");
 const carrosRouter = require("./routes/carros");
 const clientesRouter = require("./routes/clientes");
@@ -34,6 +35,7 @@ app.use(
     store,
   })
 );
+app.use(flash());
 app.use(Verificar.sessionActiva);
 app.use("/carros", Verificar.auth, carrosRouter);
 app.use("/clientes", Verificar.auth, clientesRouter);

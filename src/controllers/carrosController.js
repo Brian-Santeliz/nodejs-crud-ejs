@@ -83,6 +83,7 @@ class CarrosController {
     const { id } = req.params;
     try {
       await pool.query(`DELETE FROM carros WHERE id = ?`, [id]);
+      req.flash("exito", "Carro eliminado correctamente");
       res.status(200).redirect("/carros");
     } catch (error) {
       res.status(500).json(error).redirect("/carros");

@@ -1,4 +1,4 @@
-<%- include("../header"); %>
+<%- include("../partials/header"); %>
 <div class="container ">
     <div class="row d-flex justify-content-center">
         <%if(typeof error !== "undefined") {%>
@@ -6,7 +6,7 @@
         <%}%>
         <div class="mt-5 col-md-6">
             <% if(carros.length <= 0) {%>
-                <p class="text-capitalize text-center">Agrega nuevos carros a la concesionaria</p>
+                <p class="text-capitalize text-center">Agrega nuevos carros a la concesionaria <i class="fa fa-cars"></i> </p>
             <a href="/carros/agregar" class="btn btn-primary btn-block mt-3 text-capitalize">Agregar nuevos Carros <i class="fa fa-car"></i> </a>
                 
                 <%}else{%>
@@ -14,7 +14,7 @@
             <span class="input-group-addon">Buscar: &nbsp;</span>
             <input id="filtrar" type="text" class="form-control" placeholder="Ingresa el Nombre o Marca del carro que deseas buscar...">
             
-            <a href="/carros/agregar" class="btn btn-primary btn-block mt-3 text-capitalize">Agregar nuevos Carros</a>
+            <a href="/carros/agregar" class="btn btn-primary btn-block mt-3 text-capitalize">Agregar nuevos Carros <i class="fa fa-car"></i> </a>
         
         </div>
         <%}%>
@@ -66,4 +66,4 @@
         </div>
     </div>
 </div>
-<%- include("../footer"); %>
+<%- include("../partials/footer"); %>

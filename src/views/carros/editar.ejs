@@ -1,4 +1,4 @@
-<%- include("../header"); %>
+<%- include("../partials/header"); %>
 
 <div class="container contenedor-top mb-5">
   <% if(typeof error !== "undefined") {%>
@@ -10,18 +10,18 @@
             <form action="/carros/actualizar?_method=PUT" method="post">
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="inputEmail4">Nombre</label>
+                    <label for="nombre">Nombre</label>
                     <input value="<%= carro.id %>" name="id" type="hidden">
-                    <input required value="<%= carro.nombre %>" name="nombre"  type="text" class="form-control" id="inputEmail4" placeholder="Escribe el nombre del auto">
+                    <input required value="<%= carro.nombre %>" name="nombre"  type="text" class="form-control" id="nombre" placeholder="Escribe el nombre del auto">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="inputPassword4">Año</label>
-                    <input required name="año"  value="<%= carro.año %>" type="number" class="form-control" id="inputPassword4" placeholder="Año del carro">
+                    <label for="año">Año</label>
+                    <input required name="año"  value="<%= carro.año %>" type="number" class="form-control" id="año" placeholder="Año del carro">
                   </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputState">Marca</label>
-                    <select id="inputState" class="form-control"  required name="marca">
+                    <label for="marca">Marca</label>
+                    <select id="marca" class="form-control"  required name="marca">
                         <option value=""  selected disabled>-- Seleciona una marca --</option>
                         <% fabricantes.forEach(fabricante => { %>
                         <option  ><%= fabricante.nombre %></option>
@@ -30,12 +30,12 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-10">
-                  <label for="inputAddress">Especificaciones</label>
-                  <input  required   value="<%= carro.especificaciones %>"  name="especificaciones" type="text" class="form-control" id="inputAddress" placeholder="Describe el carro">
+                  <label for="especificaciones">Especificaciones</label>
+                  <input  required   value="<%= carro.especificaciones %>"  name="especificaciones" type="text" class="form-control" id="especificaciones" placeholder="Describe el carro">
                     </div>
                   <div class="form-group col-md-2">
-                    <label for="inputZip">Precio</label>
-                    <input  required name="precio"  value="<%= carro.precio %>" type="number" class="form-control" placeholder="$ Precio" id="inputZip">
+                    <label for="precio">Precio</label>
+                    <input  required name="precio"  value="<%= carro.precio %>" type="number" class="form-control" placeholder="$ Precio" id="precio">
                   </div>
                 </div>
                 <div class="form-group">
@@ -45,4 +45,4 @@
     </div>
 </div>
 </div>
-<%- include("../footer"); %>
+<%- include("../partials/footer"); %>

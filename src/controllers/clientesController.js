@@ -49,6 +49,7 @@ class ClienteController {
     const { cedula, nombre, telefono, direccion } = req.body;
     if (!cedula || !nombre || !telefono || !direccion) {
       /* RENDERIZAR UN MENSAJE DE ERROR EN LA VISTA DE AGREGAR */
+      /* AGREGAR MENSAJES FLASH */
       return res
         .status(500)
         .send("No hay cedula, nombre, telefono o direccion");

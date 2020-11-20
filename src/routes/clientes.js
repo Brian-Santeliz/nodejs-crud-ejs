@@ -12,7 +12,7 @@ router.post(
   [body("direccion").notEmpty().trim()],
   ctrl.postClientesAgregarController
 );
-router.post(
+router.put(
   "/actualizar/",
   [body("cedula").notEmpty().trim().isNumeric()],
   [body("nombre").notEmpty().trim()],

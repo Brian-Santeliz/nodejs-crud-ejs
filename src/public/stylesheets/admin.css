@@ -1,3 +1,6 @@
+body{
+  background-color: #eee;
+}
 @media screen and (min-width: 978px) {
   .navbar-dinamico {
     display: flex;
@@ -9,7 +12,6 @@
     margin-top: 0.3em;
   }
 }
-
 .contenedor-top{
   margin-top:2em !important;
 }
