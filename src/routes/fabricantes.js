@@ -9,6 +9,7 @@ router.get("/", ctrl.getFabricantesObtenerController);
 router.get("/editar/:id", ctrl.getFabricantesObtenerIdController);
 router.use("/eliminar/:id", ctrl.deleteFabricantesEliminarController);
 
+/* Sanitizar los campos  */
 router.post(
   "/insertar",
   [body("rif").notEmpty().trim()],

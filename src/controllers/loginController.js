@@ -4,7 +4,7 @@ class LoginController {
   getController(req, res) {
     res.render("login/login");
   }
-  async postController(req, res) {
+  async postController(req, res, next) {
     const { usuario, clave } = req.body;
     if (!usuario || !clave) {
       res.render("login/login", {

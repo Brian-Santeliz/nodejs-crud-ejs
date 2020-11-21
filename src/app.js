@@ -36,14 +36,17 @@ app.use(
   })
 );
 app.use(flash());
+
 app.use(Middleware.sessionFlash);
 app.use(Middleware.sessionActiva);
+
 app.use("/carros", Middleware.auth, carrosRouter);
 app.use("/clientes", Middleware.auth, clientesRouter);
 app.use("/fabricantes", Middleware.auth, fabricantesRouter);
 app.use("/login", loginRouter);
 app.use("/registrarse", registrarseRouter);
 app.use("/logout", logoutRouter);
+
 app.use(function (req, res, next) {
   next(res.redirect("/login"));
 });

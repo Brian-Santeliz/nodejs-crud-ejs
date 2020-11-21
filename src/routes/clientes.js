@@ -4,6 +4,11 @@ const ClienteController = require("../controllers/clientesController");
 const router = Router();
 const ctrl = new ClienteController();
 
+router.get("/", ctrl.getClientesController);
+router.get("/agregar", ctrl.getClientesAgregarController);
+router.get("/editar/:id", ctrl.getClientesEditarController);
+router.use("/eliminar/:id", ctrl.deleteClientesController);
+
 router.post(
   "/insertar",
   [body("cedula").notEmpty().trim().isNumeric()],
@@ -20,10 +25,5 @@ router.put(
   [body("direccion").notEmpty().trim()],
   ctrl.putClientesActualizarController
 );
-
-router.get("/", ctrl.getClientesController);
-router.get("/agregar", ctrl.getClientesAgregarController);
-router.get("/editar/:id", ctrl.getClientesEditarController);
-router.use("/eliminar/:id", ctrl.deleteClientesController);
 
 module.exports = router;
