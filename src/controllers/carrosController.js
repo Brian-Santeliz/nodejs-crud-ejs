@@ -100,7 +100,7 @@ class CarrosController {
   async putCarrosActualizarController(req, res) {
     const { id, nombre, año, marca, especificaciones, precio } = req.body;
     if (!nombre || !año || !marca || !especificaciones || !precio) {
-      req.flash("error", "Todos los campos son necesarios");
+      req.flash("error", "Todos los campos son necesarios para actualizar");
       res.redirect("/carros");
       return;
     }
